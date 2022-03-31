@@ -1,6 +1,14 @@
 const elForm = document.querySelector(".form");
 const elFormInput = document.querySelector(".form__input");
 const elList = document.querySelector(".todo-list");
+
+
+const elBtnWrapper = document.querySelector(".btn-wrapper");
+const elAllBtn = document.querySelector(".all-btn");
+const elComplateBtn = document.querySelector(".complate__btn");
+const elUnComplateBtn = document.querySelector(".un-complate__btn");
+
+
 const elAllList = document.querySelector(".all-list");
 const elComplate = document.querySelector(".todo-complete");
 const elUnComplate = document.querySelector(".todo-uncomplete");
@@ -38,8 +46,8 @@ function renderTodo(arr, element) {
 
   element.innerHTML = "";
 
-  let all = elAllList.textContent = arr.length;
-  let complate = elComplate.textContent = arr.filter(e => e.isComplated === true).length;
+  let all = elAllList.textContent = todos.length;
+  let complate = elComplate.textContent = todos.filter(e => e.isComplated === true).length;
   // elUnComplate.textContent = arr.filter(e => e.isComplated === false).length;
   elUnComplate.textContent = all - complate;
 
@@ -47,6 +55,7 @@ function renderTodo(arr, element) {
     const newItem = document.createElement("li");
     const newInput = document.createElement("input");
     const newBtn = document.createElement("button");
+    const newSpan = document.createElement("Span");
 
 
     newItem.textContent = todo.title;
@@ -57,7 +66,7 @@ function renderTodo(arr, element) {
     newBtn.dataset.todoId = todo.id;
     newInput.dataset.todoId = todo.id;
     newInput.classList.add("todo-list__checkbox");
-
+    newSpan.classList.add("todo-btn");
 
     if(todo.isComplated){
       newInput.checked = true;
@@ -66,7 +75,7 @@ function renderTodo(arr, element) {
 
     newItem.appendChild(newInput);
     newItem.appendChild(newBtn);
-
+    newItem.appendChild(newSpan);
     element.appendChild(newItem);
   });
 
@@ -91,5 +100,23 @@ elForm.addEventListener("submit", evt =>{
   renderTodo(todos , elList);
 
   elFormInput.value = "";
+
+});
+
+elBtnWrapper.addEventListener("click", evt => {
+
+  if(evt.target.matches(".all__btn")){
+    renderTodo(todos , elList);
+  };
+  
+  if (evt.target.matches(".complate__btn")){
+    const complateFiltered = todos.filter(e => e.isComplated === true);
+    renderTodo(complateFiltered , elList);
+  };
+
+  if (evt.target.matches(".un-complate__btn")){
+    const unComplateFiltered = todos.filter(e => e.isComplated === false);
+    renderTodo(unComplateFiltered , elList);
+  };
 
 });

@@ -48,6 +48,14 @@ body{
   border-radius: 5px;
 }
 
+.todo-btn{
+  display:inline-block;
+  background-image: url("../img/icon.png");
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+
 .btn-wrapper{
   position: fixed;
   z-index: 1;
@@ -60,11 +68,27 @@ body{
   text-align: center;
 }
 
-.btns__btn{
+.all__btn{
   width: 200px;
-  margin:0 100px;
   padding: 20px 10px;
   background-color: brown;
   border: none;
   border-radius: 10px;
 }
+
+.complate__btn{
+  width: 200px;
+  padding: 20px 10px;
+  background-color: brown;
+  border: none;
+  border-radius: 10px;
+}
+
+.un-complate__btn{
+  width: 200px;
+  padding: 20px 10px;
+  background-color: brown;
+  border: none;
+  border-radius: 10px;
+}
+
