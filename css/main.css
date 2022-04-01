@@ -50,10 +50,12 @@ body{
 
 .todo-btn{
   display:inline-block;
-  background-image: url("../img/icon.png");
-  width: 30px;
+  background-image: url("../img/bokmap-icon1.png");
+  width:30px;
   height: 30px;
   background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 .btn-wrapper{
@@ -91,4 +93,10 @@ body{
   border: none;
   border-radius: 10px;
 }
-
+.bookmark__btn{
+  width: 200px;
+  padding: 20px 10px;
+  background-color: brown;
+  border: none;
+  border-radius: 10px;
+}

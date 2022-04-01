@@ -7,13 +7,16 @@ const elBtnWrapper = document.querySelector(".btn-wrapper");
 const elAllBtn = document.querySelector(".all-btn");
 const elComplateBtn = document.querySelector(".complate__btn");
 const elUnComplateBtn = document.querySelector(".un-complate__btn");
+const elBookmarkBtn = document.querySelector(".bookmark__btn");
 
 
 const elAllList = document.querySelector(".all-list");
 const elComplate = document.querySelector(".todo-complete");
 const elUnComplate = document.querySelector(".todo-uncomplete");
+const elBookmark = document.querySelector(".todo-bookmark");
 
 const todos = [];
+const todoss = [];
 
 elList.addEventListener("click" , evt => {
 
@@ -39,6 +42,19 @@ elList.addEventListener("click" , evt => {
 
     renderTodo(todos , elList);
   }
+  
+  else if(evt.target.matches(".todo-btn")){
+
+    const bookmarkId = evt.target.dataset.todoId;
+
+    const bookmarkArr = todoss.findIndex(todo => todo.id == bookmarkId);
+    
+    todos.splice(bookmarkArr , 1);
+
+    renderTodo(todos , elList);
+    
+  }
+  
 });
 
 
@@ -50,6 +66,7 @@ function renderTodo(arr, element) {
   let complate = elComplate.textContent = todos.filter(e => e.isComplated === true).length;
   // elUnComplate.textContent = arr.filter(e => e.isComplated === false).length;
   elUnComplate.textContent = all - complate;
+  elBookmark.textContent = todos.filter(e => e.isBookmarked === true).length;
 
   arr.forEach(todo => {
     const newItem = document.createElement("li");
@@ -72,6 +89,12 @@ function renderTodo(arr, element) {
       newInput.checked = true;
       newItem.style.textDecoration = "line-through";
     }
+
+    if(todo.isBookmarked){
+      newInput.checked = true;
+      newItem.style.textDecoration = "line-through";
+    }
+
 
     newItem.appendChild(newInput);
     newItem.appendChild(newBtn);
@@ -101,6 +124,8 @@ elForm.addEventListener("submit", evt =>{
 
   elFormInput.value = "";
 
+ 
+
 });
 
 elBtnWrapper.addEventListener("click", evt => {
@@ -119,4 +144,8 @@ elBtnWrapper.addEventListener("click", evt => {
     renderTodo(unComplateFiltered , elList);
   };
 
+  if(evt.target.matches(".bookmark__btn")){
+    const bookmarkFiltered = todos.filter(e => e.isBookmarked === true);
+    renderTodo(bookmarkFiltered  , elList);
+  };
 });
