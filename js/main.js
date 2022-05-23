@@ -15,13 +15,15 @@ const elComplate = document.querySelector(".todo-complete");
 const elUnComplate = document.querySelector(".todo-uncomplete");
 const elBookmark = document.querySelector(".todo-bookmark");
 
+const elFragmentTemplate = document.querySelector(".template").content;
+
 const todos = [];
 const todoss = [];
 
 elList.addEventListener("click" , evt => {
 
  
-
+ 
   if(evt.target.matches(".todo-list__btn")){
 
     const btnId = evt.target.dataset.todoId;
@@ -68,14 +70,15 @@ function renderTodo(arr, element) {
   elUnComplate.textContent = all - complate;
   elBookmark.textContent = todos.filter(e => e.isBookmarked === true).length;
 
+  const todoFragmet = document.createDocumentFragment()
   arr.forEach(todo => {
-    const newItem = document.createElement("li");
-    const newInput = document.createElement("input");
-    const newBtn = document.createElement("button");
-    const newSpan = document.createElement("Span");
 
+    const newItem = document.createElement("li");
+    const newButton = document.createElement("button");
+    const newCheckbox = document.createElement("input");
 
     newItem.textContent = todo.title;
+    
     newInput.type = "checkbox";
     newInput.classList.add("todo-list__input");
     newBtn.textContent = "Delete";
@@ -95,6 +98,9 @@ function renderTodo(arr, element) {
       newItem.style.textDecoration = "line-through";
     }
 
+    const clonedTemplate = elFragmentTemplate.cloneNode(true);
+
+    
 
     newItem.appendChild(newInput);
     newItem.appendChild(newBtn);
@@ -115,17 +121,13 @@ elForm.addEventListener("submit", evt =>{
   const todo = {
     id: todos.length > 0 ? todos[todos.length -1].id + 1 : 1,
     title: elInputValue,
-    isComplated: false,
+    isComplated: false
   };
 
-  todos.push(todo);
-
-  renderTodo(todos , elList);
-
-  elFormInput.value = "";
-
  
-
+  todos.push(todo);
+  renderTodo(todos , elList);
+  elFormInput.value = "";
 });
 
 elBtnWrapper.addEventListener("click", evt => {
