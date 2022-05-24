@@ -22,8 +22,6 @@ const todoss = [];
 
 elList.addEventListener("click" , evt => {
 
- 
- 
   if(evt.target.matches(".todo-list__btn")){
 
     const btnId = evt.target.dataset.todoId;
@@ -31,8 +29,8 @@ elList.addEventListener("click" , evt => {
     const findIndexArr = todos.findIndex(todo => todo.id == btnId);
 
     todos.splice(findIndexArr, 1);
-
-    renderTodo(todos , elList);
+  
+    renderTodo(todos, elList);
     
   }else if(evt.target.matches(".todo-list__checkbox")){
 
@@ -42,7 +40,7 @@ elList.addEventListener("click" , evt => {
 
     findElement.isComplated = !findElement.isComplated;
 
-    renderTodo(todos , elList);
+    renderTodo(todos, elList);
   }
   
   else if(evt.target.matches(".todo-btn")){
@@ -66,7 +64,7 @@ function renderTodo(arr, element) {
 
   let all = elAllList.textContent = todos.length;
   let complate = elComplate.textContent = todos.filter(e => e.isComplated === true).length;
-  // elUnComplate.textContent = arr.filter(e => e.isComplated === false).length;
+  elUnComplate.textContent = arr.filter(e => e.isComplated === false).length;
   elUnComplate.textContent = all - complate;
   elBookmark.textContent = todos.filter(e => e.isBookmarked === true).length;
 
@@ -112,7 +110,6 @@ function renderTodo(arr, element) {
 
 
 elForm.addEventListener("submit", evt =>{
-
   evt.preventDefault();
 
   const elInputValue = elFormInput.value.trim();
